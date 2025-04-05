@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "53379338604",
+    "project_id": "crudpractica12",
+    "storage_bucket": "crudpractica12.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53379338604:android:543367ab1d2f650a0aa349",
+        "android_client_info": {
+          "package_name": "mx.edu.itson.crud"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHVHokbw_zejBC6a1e4uT0JMoBIK10_Zk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

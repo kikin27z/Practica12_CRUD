@@ -1,5 +1,6 @@
 package mx.edu.itson.crud
 
+
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,8 +19,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        enableEdgeToEdge()  // Solo una vez
+
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding.root)  // Solo una vez
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         viewModel = ViewModelProvider(this)[TareaViewModel::class.java]
 
@@ -28,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnAgregarTarea.setOnClickListener {
+            println("agregado")
             val tarea = Tarea(
                 titulo = binding.etTitulo.text.toString(),
                 descripcion = binding.etDescripcion.text.toString()
@@ -40,24 +50,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnActualizarTarea.setOnClickListener {
-            tareaEdit.titulo = ""
-            tareaEdit.descripcion = ""
-
             tareaEdit.titulo = binding.etTitulo.text.toString()
             tareaEdit.descripcion = binding.etDescripcion.text.toString()
 
             viewModel.actualizarTareas(tareaEdit)
         }
 
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        // Datos de prueba
+        val tareasTest = listOf(
+            Tarea("1", "Tarea de prueba 1", "Descripción de prueba 1"),
+            Tarea("2", "Tarea de prueba 2", "Descripción de prueba 2")
+        )
+        setupRecyclerView(tareasTest)
     }
-
     fun setupRecyclerView(listaTareas: List<Tarea>){
         adapter = TareaAdapter(listaTareas, ::borrarTarea, ::actualizarTarea)
         binding.rvTareas.adapter = adapter

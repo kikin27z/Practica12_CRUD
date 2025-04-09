@@ -13,7 +13,6 @@ class TareaAdapter(
     var onBorrarClic: (String) -> Unit,
     var onActualizarClic: (Tarea) -> Unit
 ): RecyclerView.Adapter<TareaAdapter.ViewHolder>() {
-
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val cvTarea: CardView = itemView.findViewById(R.id.cvTarea)
         val tvTitulo: TextView = itemView.findViewById(R.id.tvTitulo)
@@ -22,7 +21,7 @@ class TareaAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_tarea, parent,  false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_tarea,parent,false)
         return ViewHolder(view)
     }
 
@@ -33,7 +32,7 @@ class TareaAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val tarea = listaTareas[position]
 
-        holder.tvTitulo.text = tarea.titulo
+        holder.tvTitulo.text = tarea.titulo;
         holder.tvDescripcion.text = tarea.descripcion
 
         holder.ibtnBorrar.setOnClickListener {
